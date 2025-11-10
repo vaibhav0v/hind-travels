@@ -286,6 +286,9 @@
             font-weight: 600;
             width: 100%;
             margin-top: 1rem;
+              margin-right: auto;
+              margin-left:auto;
+               width: auto;   
             transition: all 0.3s ease;
             font-size: 1.1rem;
             box-shadow: 0 4px 15px rgba(26, 82, 118, 0.3);
