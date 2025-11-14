@@ -6,8 +6,701 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hind Travels - Premium Tours & Travel Services</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #f39c12;
+            --secondary: #2c3e50;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .logo-icon {
+            color: var(--primary);
+            margin-right: 0.5rem;
+        }
+
+        .mobile-menu {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .nav-btn {
+            background: var(--primary);
+            color: white !important;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: #e67e22;
+            transform: scale(1.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 8rem 0 4rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .hero-btn:hover {
+            background: #e67e22;
+            transform: scale(1.05);
+        }
+
+        /* Booking Form */
+        .booking-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-top: -3rem;
+            margin-bottom: 4rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .form-control {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-center {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .book-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        .book-btn:hover {
+            background: #e67e22;
+            transform: scale(1.05);
+        }
+
+        /* Section */
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #081a23;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title p {
+            color: #1f1f3a;
+            font-size: 1.1rem;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-img {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .service-content h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .service-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .service-price span {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .service-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .service-btn:hover {
+            background: #e67e22;
+            transform: scale(1.05);
+        }
+
+        /* Travel Services Section */
+        .travel-services {
+            background: var(--light);
+        }
+
+        .travel-services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .travel-service-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .travel-service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .travel-service-item i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .travel-service-item h3 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Fleet Section */
+        .fleet-section {
+            background: white;
+        }
+
+        .fleet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .fleet-card {
+            background: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .fleet-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .fleet-img {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .fleet-content {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .fleet-content h3 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .fleet-features {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .fleet-features li {
+            padding: 0.3rem 0;
+            color: #666;
+        }
+
+        .fleet-features li i {
+            color: var(--primary);
+            margin-right: 0.5rem;
+        }
+
+        .fleet-price {
+            font-size: 1.3rem;
+            color: var(--primary);
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        /* Popular Destinations Section */
+        .destinations-section {
+            background: linear-gradient(180deg, #0e1330 0%, #1a2347 100%);
+            color: #fff;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .destinations-section .section-title h2 {
+            color: white;
+        }
+
+        .destinations-section .section-title p {
+            color: #b0b0d1;
+        }
+
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .destination-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 25px;
+            color: #fff;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .destination-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .destination-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .destination-price {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-top: 0.5rem;
+            font-weight: bold;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            background: var(--light);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-text {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .author-info h4 {
+            color: var(--secondary);
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .rating {
+            color: var(--primary);
+            margin-top: 0.3rem;
+        }
+
+        /* About Section */
+        .about-section {
+            background: white;
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .about-feature {
+            text-align: center;
+        }
+
+        .about-feature i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .about-feature h4 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Followers Section */
+        .followers-section {
+            background: linear-gradient(135deg, var(--primary), #e67e22);
+            color: white;
+            padding: 4rem 0;
+        }
+
+        .followers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .follower-item {
+            padding: 1.5rem;
+        }
+
+        .follower-item i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .follower-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .follower-text {
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-column p {
+            color: #ccc;
+            line-height: 1.8;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 999;
+        }
+
+        .back-to-top:hover {
+            background: #e67e22;
+            transform: scale(1.1);
+        }
+
+        .back-to-top.show {
+            display: flex;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--dark);
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -17,248 +710,137 @@
             <a href="#" class="logo">
                 <i class="fas fa-car logo-icon"></i> Hind <span>Travels</span>
             </a>
-            <div class="mobile-menu">☰</div>
+            <div class="mobile-menu" onclick="toggleMenu()">☰</div>
             <nav>
-                <ul>
-                    <li><a href="#" class="nav-link active" data-target="home">Home</a></li>
-                    <li><a href="#" class="nav-link" data-target="services">Services</a></li>
-                    <li><a href="#" class="nav-link" data-target="fleet">Our Fleet</a></li>
-                    <li><a href="#" class="nav-link" data-target="destinations">Destinations</a></li>
-                    <li><a href="#" class="nav-link" data-target="testimonials">Testimonials</a></li>
-                    <li><a href="#" class="nav-link" data-target="about">About Us</a></li>
-                    <li><button class="nav-btn">Book Now</button></li>
+                <ul id="navMenu">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#services" class="nav-link">Service</a></li>
+                    <li><a href="#fleet" class="nav-link">Our Fleet</a></li>
+                    <li><a href="#destinations" class="nav-link">Destination</a></li>
+                    <li><a href="#testimonials" class="nav-link">Testimonial</a></li>
+                    <li><a href="#about" class="nav-link">About Us</a></li>
+                    <li><a href="#bookingForm" class="nav-link nav-btn">Book Now</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Home Section -->
-    <section id="home" class="page-section active">
-        <!-- Hero Section -->
+    <!-- Hero Section -->
+    <section id="home">
         <div class="hero">
             <div class="container hero-content">
-                <h1 data-aos="fade-up" data-aos-duration="1000">Discover India With Hind Travels</h1>
-                <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">Experience premium travel services with professional drivers, comfortable vehicles, and unforgettable journeys across India.</p>
-                <button class="hero-btn" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">Explore Destinations</button>
+                <h1>Discover India With Hind Travels</h1>
+                <p>Experience premium travel services with professional drivers, comfortable vehicles, and unforgettable
+                    journeys across India.</p>
+                <button class="hero-btn" onclick="scrollToBooking()">Explore Destinations</button>
             </div>
         </div>
 
-     <!-- Booking Form -->
-<div class="container">
-  <div class="booking-form" data-aos="fade-up" data-aos-duration="1000">
-    <!-- Row 1 -->
-    <div class="form-row">
-      <div class="form-group">
-        <label for="pickup">Pickup City *</label>
-        <input type="text" id="pickup" class="form-control" placeholder="Enter Pickup City" required>
-      </div>
-
-      <div class="form-group">
-        <label for="destination">Destination City *</label>
-        <input type="text" id="destination" class="form-control" placeholder="Enter Destination City" required>
-      </div>
-
-      <div class="form-group">
-        <label for="trip-type">Trip Type *</label>
-        <select id="trip-type" class="form-control" required>
-          <option value="">- Select -</option>
-          <option value="one-way">One Way</option>
-          <option value="round-trip">Round Trip</option>
-          <option value="hourly">Hourly Rental</option>
-          <option value="multi-day">Multi-Day Package</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="taxi-type">Taxi Type *</label>
-        <select id="taxi-type" class="form-control" required>
-          <option value="">- Select -</option>
-          <option value="dzire">Maruti Suzuki Dzire</option>
-          <option value="wagonr">Maruti Wagon R</option>
-          <option value="ertiga">Maruti Ertiga</option>
-          <option value="innova">Toyota Innova</option>
-          <option value="crysta">Innova Crysta</option>
-          <option value="carens">Kia Carens</option>
-          <option value="traveller">Tempo Traveller</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="pickup-date">Pickup Date *</label>
-        <input type="date" id="pickup-date" class="form-control" required>
-      </div>
-    </div>
-
-    <!-- Row 2 -->
-    <div class="form-row">
-      <div class="form-group">
-        <label for="pickup-time">Pickup Time *</label>
-        <input type="time" id="pickup-time" class="form-control" required>
-      </div>
-
-      <div class="form-group">
-        <label for="name">Name *</label>
-        <input type="text" id="name" class="form-control" placeholder="Enter Your Name" required>
-      </div>
-
-      <div class="form-group">
-        <label for="mobile">Mobile *</label>
-        <input type="tel" id="mobile" class="form-control" placeholder="Enter Mobile Number" required>
-      </div>
-    </div>
-
-    <!-- Button -->
-    <div class="form-row" style="justify-content: center;">
-      <button class="book-btn" type="submit">Confirm Booking</button>
-    </div>
-  </div>
-</div>
-
-
-
-        <!-- Services Preview -->
-        <div class="section">
-            <div class="container">
-                <div class="section-title" data-aos="fade-up">
-                    <h2>Our Services</h2>
-                    <p>We offer a variety of travel solutions to meet your specific needs</p>
-                </div>
-                <div class="services-grid">
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="service-img"><i class="fas fa-city"></i></div>
-                        <div class="service-content">
-                            <h3>City Tours</h3>
-                            <p>Explore the vibrant cities of India with our guided tours. Visit historical sites, markets, and cultural landmarks.</p>
-                            <div class="service-price">
-                                <span>Starting at ₹1,499/day</span>
-                                <button class="service-btn">Details</button>
-                            </div>
-                        </div>
+        <!-- Booking Form -->
+        <div class="container">
+            <div class="booking-form" id="bookingForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="pickup">Pickup City *</label>
+                        <input type="text" id="pickup" class="form-control" placeholder="Enter Pickup City" required>
                     </div>
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="400">
-                        <div class="service-img"><i class="fas fa-mountain"></i></div>
-                        <div class="service-content">
-                            <h3>Hill Station Getaways</h3>
-                            <p>Escape to the serene hill stations of North India. Enjoy cool climate and breathtaking views.</p>
-                            <div class="service-price">
-                                <span>Starting at ₹2,999/day</span>
-                                <button class="service-btn">Details</button>
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <label for="destination">Destination City *</label>
+                        <input type="text" id="destination" class="form-control" placeholder="Enter Destination City"
+                            required>
                     </div>
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="600">
-                        <div class="service-img"><i class="fas fa-umbrella-beach"></i></div>
-                        <div class="service-content">
-                            <h3>Beach Vacations</h3>
-                            <p>Relax on the beautiful beaches of Goa, Kerala, and Andaman with our curated beach packages.</p>
-                            <div class="service-price">
-                                <span>Starting at ₹3,499/day</span>
-                                <button class="service-btn">Details</button>
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <label for="trip-type">Trip Type *</label>
+                        <select id="trip-type" class="form-control" required>
+                            <option value="">- Select -</option>
+                            <option value="one-way">One Way</option>
+                            <option value="round-trip">Round Trip</option>
+                            <option value="hourly">Hourly Rental</option>
+                            <option value="multi-day">Multi-Day Package</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="taxi-type">Taxi Type *</label>
+                        <select id="taxi-type" class="form-control" required>
+                            <option value="">- Select -</option>
+                            <option value="dzire">Maruti Suzuki Dzire</option>
+                            <option value="wagonr">Maruti Wagon R</option>
+                            <option value="ertiga">Maruti Ertiga</option>
+                            <option value="innova">Toyota Innova</option>
+                            <option value="crysta">Innova Crysta</option>
+                            <option value="carens">Kia Carens</option>
+                            <option value="traveller">Tempo Traveller</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pickup-date">Pickup Date *</label>
+                        <input type="date" id="pickup-date" class="form-control" required>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Stats Section -->
-        <div class="stats-section">
-            <div class="container">
-                <div class="stats-grid">
-                    <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
-                        <div class="stat-number">15K+</div>
-                        <div class="stat-text">Happy Travelers</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="pickup-time">Pickup Time *</label>
+                        <input type="time" id="pickup-time" class="form-control" required>
                     </div>
-                    <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
-                        <div class="stat-number">500+</div>
-                        <div class="stat-text">Destinations</div>
+                    <div class="form-group">
+                        <label for="name">Name *</label>
+                        <input type="text" id="name" class="form-control" placeholder="Enter Your Name" required>
                     </div>
-                    <div class="stat-item" data-aos="fade-up" data-aos-delay="600">
-                        <div class="stat-number">24/7</div>
-                        <div class="stat-text">Customer Support</div>
+                    <div class="form-group">
+                        <label for="mobile">Mobile *</label>
+                        <input type="tel" id="mobile" class="form-control" placeholder="Enter Mobile Number" required>
                     </div>
-                    <div class="stat-item" data-aos="fade-up" data-aos-delay="800">
-                        <div class="stat-number">98%</div>
-                        <div class="stat-text">Satisfaction Rate</div>
-                    </div>
+                </div>
+
+                <div class="form-center">
+                    <button class="book-btn" type="button" onclick="submitBooking()">Confirm Booking</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="page-section">
-        <div class="section">
-            <div class="container">
-                <div class="section-title" data-aos="fade-up">
-                    <h2>Our Travel Services</h2>
-                    <p>Comprehensive travel solutions for every type of journey</p>
+    <!-- Our Services Section -->
+    <section id="services" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>We offer a variety of travel solutions to meet your specific needs</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-img"><i class="fas fa-city"></i></div>
+                    <div class="service-content">
+                        <h3>City Tours</h3>
+                        <p>Explore the vibrant cities of India with our guided tours. Visit historical sites, markets,
+                            and cultural landmarks.</p>
+                        <div class="service-price">
+                            <span>Starting at ₹1,499/day</span>
+                            <button class="service-btn" onclick="scrollToBooking()">Book Now</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="services-grid">
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="service-img"><i class="fas fa-city"></i></div>
-                        <div class="service-content">
-                            <h3>City Tours</h3>
-                            <p>Explore the vibrant cities of India with our guided tours. Visit historical sites, markets, and cultural landmarks with experienced local guides.</p>
-                            <div class="service-price">
-                                <span>Starting at ₹1,499/day</span>
-                                <button class="service-btn">Book Now</button>
-                            </div>
+                <div class="service-card">
+                    <div class="service-img"><i class="fas fa-mountain"></i></div>
+                    <div class="service-content">
+                        <h3>Hill Station Getaways</h3>
+                        <p>Escape to the serene hill stations of North India. Enjoy cool climate and breathtaking views.
+                        </p>
+                        <div class="service-price">
+                            <span>Starting at ₹2,999/day</span>
+                            <button class="service-btn" onclick="scrollToBooking()">Book Now</button>
                         </div>
                     </div>
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="service-img"><i class="fas fa-mountain"></i></div>
-                        <div class="service-content">
-                            <h3>Hill Station Getaways</h3>
-                            <p>Escape to the serene hill stations of North India. Enjoy cool climate and breathtaking views in Shimla, Manali, Darjeeling and more.</p>
-                            <div class="service-price">
-                                <span>Starting at ₹2,999/day</span>
-                                <button class="service-btn">Book Now</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="400">
-                        <div class="service-img"><i class="fas fa-umbrella-beach"></i></div>
-                        <div class="service-content">
-                            <h3>Beach Vacations</h3>
-                            <p>Relax on the beautiful beaches of Goa, Kerala, and Andaman with our curated beach packages including water sports and local cuisine.</p>
-                            <div class="service-price">
-                                <span>Starting at ₹3,499/day</span>
-                                <button class="service-btn">Book Now</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="500">
-                        <div class="service-img"><i class="fas fa-hiking"></i></div>
-                        <div class="service-content">
-                            <h3>Adventure Tours</h3>
-                            <p>For the thrill-seekers, we offer adventure packages including trekking, river rafting, paragliding and camping in Himalayas.</p>
-                            <div class="service-price">
-                                <span>Starting at ₹4,999/day</span>
-                                <button class="service-btn">Book Now</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="600">
-                        <div class="service-img"><i class="fas fa-history"></i></div>
-                        <div class="service-content">
-                            <h3>Heritage & Culture</h3>
-                            <p>Immerse yourself in India's rich heritage with tours to historical monuments, temples, and cultural centers across the country.</p>
-                            <div class="service-price">
-                                <span>Starting at ₹2,499/day</span>
-                                <button class="service-btn">Book Now</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="700">
-                        <div class="service-img"><i class="fas fa-spa"></i></div>
-                        <div class="service-content">
-                            <h3>Wellness Retreats</h3>
-                            <p>Rejuvenate with our wellness packages including yoga, meditation, Ayurvedic treatments at premier wellness centers.</p>
-                            <div class="service-price">
-                                <span>Starting at ₹5,999/day</span>
-                                <button class="service-btn">Book Now</button>
-                            </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img"><i class="fas fa-umbrella-beach"></i></div>
+                    <div class="service-content">
+                        <h3>Beach Vacations</h3>
+                        <p>Relax on the beautiful beaches of Goa, Kerala, and Andaman with our curated beach packages.
+                        </p>
+                        <div class="service-price">
+                            <span>Starting at ₹3,499/day</span>
+                            <button class="service-btn" onclick="scrollToBooking()">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -266,159 +848,707 @@
         </div>
     </section>
 
-    <!-- Fleet Section -->
-    <section id="fleet" class="page-section">
-        <div class="section">
-            <div class="container">
-                <div class="section-title" data-aos="fade-up">
-                    <h2>Our Travel Fleet</h2>
-                    <p>Choose from our diverse range of comfortable vehicles for your journey</p>
+    <!-- Our Travel Services Section -->
+    <section class="section travel-services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Travel Services</h2>
+                <p>Comprehensive travel solutions for every journey</p>
+            </div>
+            <div class="travel-services-grid">
+                <div class="travel-service-item">
+                    <i class="fas fa-plane-departure"></i>
+                    <h3>Airport Transfers</h3>
+                    <p>Comfortable rides to and from airports</p>
                 </div>
-                <div class="fleet-grid">
-                    <div class="fleet-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="fleet-img"><i class="fas fa-car"></i></div>
-                        <div class="fleet-content">
-                            <h3>Compact Sedan</h3>
-                            <p>Ideal for small groups or couples traveling within cities</p>
-                            <ul class="fleet-features">
-                                <li>Up to 3 passengers</li>
-                                <li>Air conditioning</li>
-                                <li>Fuel efficient</li>
-                                <li>Affordable pricing</li>
-                            </ul>
-                            <div class="service-price">From ₹15/km</div>
-                        </div>
+                <div class="travel-service-item">
+                    <i class="fas fa-route"></i>
+                    <h3>Outstation Trips</h3>
+                    <p>Long distance travel made easy</p>
+                </div>
+                <div class="travel-service-item">
+                    <i class="fas fa-clock"></i>
+                    <h3>Hourly Rentals</h3>
+                    <p>Flexible hourly cab rentals</p>
+                </div>
+                <div class="travel-service-item">
+                    <i class="fas fa-calendar-check"></i>
+                    <h3>Monthly Packages</h3>
+                    <p>Cost-effective monthly subscriptions</p>
+                </div>
+                <div class="travel-service-item">
+                    <i class="fas fa-users"></i>
+                    <h3>Corporate Services</h3>
+                    <p>Professional corporate travel solutions</p>
+                </div>
+                <div class="travel-service-item">
+                    <i class="fas fa-heart"></i>
+                    <h3>Wedding Events</h3>
+                    <p>Special occasion transportation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Travel Fleet Section -->
+    <section id="fleet" class="section fleet-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Travel Fleet</h2>
+                <p>Choose from our premium collection of vehicles</p>
+            </div>
+            <div class="fleet-grid">
+                <div class="fleet-card">
+                    <div class="fleet-img"><i class="fas fa-car"></i></div>
+                    <div class="fleet-content">
+                        <h3>Maruti Suzuki Dzire</h3>
+                        <ul class="fleet-features">
+                            <li><i class="fas fa-check"></i> 4 Seater</li>
+                            <li><i class="fas fa-check"></i> AC Available</li>
+                            <li><i class="fas fa-check"></i> Luggage Space</li>
+                        </ul>
+                        <div class="fleet-price">₹12/km</div>
+                        <button class="service-btn" onclick="scrollToBooking()">Book Now</button>
                     </div>
-                    <div class="fleet-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="fleet-img"><i class="fas fa-car-side"></i></div>
-                        <div class="fleet-content">
-                            <h3>Premium Sedan</h3>
-                            <p>Spacious interior for comfortable intercity travel</p>
-                            <ul class="fleet-features">
-                                <li>Up to 4 passengers</li>
-                                <li>Premium interior</li>
-                                <li>Charging ports</li>
-                                <li>Ample boot space</li>
-                            </ul>
-                            <div class="service-price">From ₹18/km</div>
-                        </div>
+                </div>
+                <div class="fleet-card">
+                    <div class="fleet-img"><i class="fas fa-car-side"></i></div>
+                    <div class="fleet-content">
+                        <h3>Maruti Ertiga</h3>
+                        <ul class="fleet-features">
+                            <li><i class="fas fa-check"></i> 6-7 Seater</li>
+                            <li><i class="fas fa-check"></i> AC Available</li>
+                            <li><i class="fas fa-check"></i> Extra Luggage Space</li>
+                        </ul>
+                        <div class="fleet-price">₹14/km</div>
+                        <button class="service-btn" onclick="scrollToBooking()">Book Now</button>
                     </div>
-                    <div class="fleet-card" data-aos="fade-up" data-aos-delay="400">
-                        <div class="fleet-img"><i class="fas fa-car-alt"></i></div>
-                        <div class="fleet-content">
-                            <h3>Luxury Sedan</h3>
-                            <p>Premium vehicles for business or special occasions</p>
-                            <ul class="fleet-features">
-                                <li>Up to 4 passengers</li>
-                                <li>Leather seats</li>
-                                <li>Professional chauffeur</li>
-                                <li>Premium amenities</li>
-                            </ul>
-                            <div class="service-price">From ₹25/km</div>
-                        </div>
+                </div>
+                <div class="fleet-card">
+                    <div class="fleet-img"><i class="fas fa-van-shuttle"></i></div>
+                    <div class="fleet-content">
+                        <h3>Toyota Innova</h3>
+                        <ul class="fleet-features">
+                            <li><i class="fas fa-check"></i> 7 Seater</li>
+                            <li><i class="fas fa-check"></i> Premium AC</li>
+                            <li><i class="fas fa-check"></i> Spacious Interior</li>
+                        </ul>
+                        <div class="fleet-price">₹16/km</div>
+                        <button class="service-btn" onclick="scrollToBooking()">Book Now</button>
                     </div>
-                    <div class="fleet-card" data-aos="fade-up" data-aos-delay="500">
-                        <div class="fleet-img"><i class="fas fa-shuttle-van"></i></div>
-                        <div class="fleet-content">
-                            <h3>SUV</h3>
-                            <p>Spacious vehicles perfect for groups or extra luggage</p>
-                            <ul class="fleet-features">
-                                <li>Up to 6 passengers</li>
-                                <li>Extra luggage space</li>
-                                <li>All-weather capability</li>
-                                <li>Comfortable for long trips</li>
-                            </ul>
-                            <div class="service-price">From ₹22/km</div>
-                        </div>
+                </div>
+                <div class="fleet-card">
+                    <div class="fleet-img"><i class="fas fa-bus"></i></div>
+                    <div class="fleet-content">
+                        <h3>Tempo Traveller</h3>
+                        <ul class="fleet-features">
+                            <li><i class="fas fa-check"></i> 12-17 Seater</li>
+                            <li><i class="fas fa-check"></i> AC Available</li>
+                            <li><i class="fas fa-check"></i> Perfect for Groups</li>
+                        </ul>
+                        <div class="fleet-price">₹22/km</div>
+                        <button class="service-btn" onclick="scrollToBooking()">Book Now</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Destinations Section -->
-    <section id="destinations" class="page-section">
-        <div class="section">
-            <div class="container">
-                <div class="section-title" data-aos="fade-up">
-                    <h2>Popular Destinations</h2>
-                    <p>Explore India's most captivating places with our curated travel packages</p>
+    <style>
+        /* 1. Base Styles (Keeping your original dark theme concept) */
+        body {
+            font-family: 'Poppins', sans-serif;
+            /* Changed font for modern look */
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a2e;
+            color: #e0e0e0;
+        }
+
+        .section.destinations-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Section Title */
+        .section-title h2 {
+            font-size: 40px;
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: #a0a0c0;
+            margin-bottom: 50px;
+        }
+
+        /* 2. Destinations Grid and Card Styling (Eye-Catchy) */
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
+        }
+
+        .destination-card {
+            background: linear-gradient(145deg, #2a2a4a, #1f1f3a);
+            /* Gradient for depth */
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            /* Stronger shadow */
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            text-align: center;
+            border: 1px solid #3a3a5e;
+            position: relative;
+            overflow: hidden;
+            /* For the subtle glow effect */
+        }
+
+        .destination-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 170, 255, 0.1);
+            /* Subtle blue overlay */
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            /* Lift and enlarge slightly */
+            box-shadow: 0 15px 35px rgba(0, 170, 255, 0.2), 0 0 40px rgba(0, 170, 255, 0.1);
+            /* Blue glow */
+        }
+
+        .destination-card:hover::before {
+            opacity: 0.2;
+        }
+
+        .destination-card h3 {
+            font-size: 20px;
+            color: #00aaff;
+            /* Cool Blue Title */
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .destination-price {
+            font-size: 28px;
+            color: #38c738;
+            /* Green for price/value */
+            font-weight: 800;
+        }
+
+
+        /* 3. Modal/Pop-up Styles */
+        .modal-overlay {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            /* Darker overlay */
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: #220146 !important;
+            color: #e0e0e0;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            /* box-shadow: 0 10px 40px rgba(0, 170, 255, 0.4); */
+            position: relative;
+            transform: scale(0.8);
+            opacity: 0;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        }
+
+        .modal-overlay.active .modal-content {
+
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .modal-content h3 {
+            color: #00aaff;
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .modal-content .modal-image {
+            width: 100%;
+            height: 200px;
+            background-color: #7ddb57;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+        }
+
+        .modal-content .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* or contain */
+            border-radius: 10px;
+        }
+
+
+        .modal-details {
+            text-align: left;
+            line-height: 1.8;
+        }
+
+        .modal-details p {
+            margin-bottom: 8px;
+            border-bottom: 1px dashed #3a3a5e;
+            padding-bottom: 5px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            color: #ff6347;
+            /* Tomato red for exit */
+            cursor: pointer;
+            transition: color 0.2s;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: #ff0000;
+        }
+
+        .modal-book-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #38c738;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            margin-top: 25px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .modal-book-button:hover {
+            background-color: #2da82d;
+        }
+    </style>
+    <!--destination area-->
+    <style>
+        /* --- Styling for Dark Theme, Cards, and Modal --- */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a2e;
+            /* Dark background */
+            color: #e0e0e0;
+        }
+
+        .section.destinations-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title h2 {
+            font-size: 40px;
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: #a0a0c0;
+            margin-bottom: 50px;
+        }
+
+        /* Cards (Eye-Catchy) */
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .destination-card {
+            background: linear-gradient(145deg, #2a2a4a, #1f1f3a);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #3a3a5e;
+            text-align: center;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 35px rgba(0, 170, 255, 0.2), 0 0 40px rgba(0, 170, 255, 0.1);
+        }
+
+        .destination-card h3 {
+            font-size: 20px;
+            color: #00aaff;
+            /* Cool Blue Title */
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .destination-price {
+            font-size: 28px;
+            color: #38c738;
+            /* Green for price/value */
+            font-weight: 800;
+        }
+
+        /* Modal/Pop-up Styles */
+        .modal-overlay {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            /* KEY FIX: Makes the modal appear */
+        }
+
+        .modal-content {
+            background-color: #2a2a4a;
+            color: #e0e0e0;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            /* box-shadow: 0 10px 40px rgba(0, 170, 255, 0.4); */
+            position: relative;
+            transform: scale(0.8);
+            opacity: 0;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .modal-content h3 {
+            color: #00aaff;
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 200px;
+            background-color: #3a3a5e;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+        }
+
+        .modal-details {
+            text-align: left;
+            line-height: 1.8;
+        }
+
+        .modal-details p {
+            margin-bottom: 8px;
+            border-bottom: 1px dashed #3a3a5e;
+            padding-bottom: 5px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            color: #ff6347;
+            cursor: pointer;
+        }
+
+        .modal-book-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #38c738;
+            color: white;
+            border-radius: 8px;
+            margin-top: 25px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .modal-book-button:hover {
+            background-color: #2da82d;
+        }
+    </style>
+
+    <section id="destinations" class="section destinations-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Popular Destinations</h2>
+                <p class="section-subtitle">Explore our most loved travel destinations across India</p>
+            </div>
+            <div class="destinations-grid">
+                <div class="destination-card" data-title="Agra to Delhi" data-price="₹2,499" data-time="14 hours"
+                    data-distance="400 km" data-description="The quick route between the capital and the city of Taj." data-image="agra_to_delhi.jpeg"
+                    onclick="openModal(this)">
+                    <h3>Agra to Delhi</h3>
+                    <div class="destination-price">₹2,499</div>
                 </div>
-                <div class="destinations-grid">
-                    <div class="destination-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="destination-img" style="background-image: url('https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')"></div>
-                        <div class="destination-overlay">
-                            <h3>Golden Triangle</h3>
-                            <p>Delhi, Agra, Jaipur - India's most famous tourist circuit</p>
-                            <div class="destination-price">From ₹24,999</div>
-                        </div>
-                    </div>
-                    <div class="destination-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="destination-img" style="background-image: url('https://images.unsplash.com/photo-1588418070000-11cc95515c5a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')"></div>
-                        <div class="destination-overlay">
-                            <h3>Kerala Backwaters</h3>
-                            <p>Serene houseboat experience through palm-fringed canals</p>
-                            <div class="destination-price">From ₹18,999</div>
-                        </div>
-                    </div>
-                    <div class="destination-card" data-aos="fade-up" data-aos-delay="400">
-                        <div class="destination-img" style="background-image: url('https://images.unsplash.com/photo-1564507592333-c60657eea523?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')"></div>
-                        <div class="destination-overlay">
-                            <h3>Goa Beaches</h3>
-                            <p>Sun, sand and Portuguese heritage on India's west coast</p>
-                            <div class="destination-price">From ₹15,999</div>
-                        </div>
-                    </div>
+                <div class="destination-card" data-title="Agra to Jaipur" data-price="₹3,299" data-time="10 hours"
+                    data-distance="240 km" data-description="Connecting the Golden Triangle cities." data-image="Jaipur.jpeg"
+                    onclick="openModal(this)">
+                    <h3>Agra to Jaipur</h3>
+                    <div class="destination-price">₹3,299</div>
+                </div>
+                <div class="destination-card" data-title="Delhi to Shimla" data-price="₹5,999" data-time="12 hours"
+                    data-distance="340 km" data-description="Scenic drive to the Queen of Hills." data-image="shimla.jpeg"
+                    onclick="openModal(this)">
+                    <h3>Delhi to Shimla</h3>
+                    <div class="destination-price">₹5,999</div>
+                </div>
+                <div class="destination-card" data-title="Delhi to Manali" data-price="₹7,499" data-time="16 hours"
+                    data-distance="540 km" data-description="Journey to the Himalayan valley." data-image = "Manali.jpeg"
+                    onclick="openModal(this)">
+                    <h3>Delhi to Manali</h3>
+                    <div class="destination-price">₹7,499</div>
+                </div>
+                <div class="destination-card" data-title="Agra to Mathura" data-price="₹1,299" data-time="3 hours"
+                    data-distance="60 km" data-description="Short trip to the birthplace of Lord Krishna." data-image="Mathura.jpeg"
+                    onclick="openModal(this)">
+                    <h3>Agra to Mathura</h3>
+                    <div class="destination-price">₹1,299</div>
+                </div>
+                <div class="destination-card" data-title="Delhi to Haridwar" data-price="₹3,999" data-time="8 hours"
+                    data-distance="210 km" data-description="Pilgrimage route to the holy city." data-image="Haridwar.jpeg"
+                    onclick="openModal(this)">
+                    <h3>Delhi to Haridwar</h3>
+                    <div class="destination-price">₹3,999</div>
+                </div>
+                <div class="destination-card" data-title="Agra to Lucknow" data-price="₹4,299" data-time="10 hours"
+                    data-distance="335 km" data-description="Linking the two major cities of Uttar Pradesh." data-image="Lucknow.jpeg"
+                    onclick="openModal(this)">
+                    <h3>Agra to Lucknow</h3>
+                    <div class="destination-price">₹4,299</div>
+                </div>
+                <div class="destination-card" data-title="Delhi to Rishikesh" data-price="₹4,199" data-time="9 hours"
+                    data-distance="230 km" data-description="Adventure and Yoga capital of India." data-image="rishikesh.jpeg"
+                    onclick="openModal(this)">
+                    <h3>Delhi to Rishikesh</h3>
+                    <div class="destination-price">₹4,199</div>
+                </div>
+                <div class="destination-card" data-title="Jaipur to Udaipur" data-price="₹5,499" data-time="12 hours"
+                    data-distance="420 km" data-description="Route between the Pink City and the City of Lakes." data-image="Udaipur.jpeg"
+                    onclick="openModal(this)">
+                    <h3>Jaipur to Udaipur</h3>
+                    <div class="destination-price">₹5,499</div>
+                </div>
+                <div class="destination-card" data-title="Delhi to Nainital" data-price="₹6,299" data-time="10 hours"
+                    data-distance="300 km" data-description="Trip to the famous Kumaon hill station." data-image="nainital.jpeg"
+                    onclick="openModal(this)">
+                    <h3>Delhi to Nainital</h3>
+                    <div class="destination-price">₹6,299</div>
+                </div>
+                <div class="destination-card" data-title="Agra to Varanasi" data-price="₹6,999" data-time="16 hours"
+                    data-distance="630 km" data-description="The spiritual journey from Agra to the oldest city." data-image="varanasi.jpeg"
+                    onclick="openModal(this)">
+                    <h3>Agra to Varanasi</h3>
+                    <div class="destination-price">₹6,999</div>
+                </div>
+                <div class="destination-card" data-title="Delhi to Mussoorie" data-price="₹5,299" data-time="10 hours"
+                    data-distance="270 km" data-description="Drive to the majestic hill station." data-image="Mussoorie.jpeg"
+                    onclick="openModal(this)">
+                    <h3>Delhi to Mussoorie</h3>
+                    <div class="destination-price">₹5,299</div>
                 </div>
             </div>
         </div>
+        <div id="destinationModal" class="modal-overlay">
+            <div class="modal-content">
+                <span class="modal-close" onclick="closeModal()">&times;</span>
+                <h3 id="modalTitle"></h3>
+
+                <div class="modal-image">
+                    <img src="" alt="Route Image" id="imageRoute">
+                </div>
+
+                <div class="modal-details">
+                    <p><strong>Price:</strong> <span id="modalPrice"></span></p>
+                    <p><strong>Est. Travel Time:</strong> <span id="modalTime"></span></p>
+                    <p><strong>Distance:</strong> <span id="modalDistance"></span></p>
+                    <p><strong>Highlights:</strong> <span id="modalDescription"></span></p>
+                </div>
+
+                <button class="modal-book-button" onclick="closeModal(); scrollToBooking()">Book This Trip Now</button>
+            </div>
+        </div>
+
+        <script>
+            // Function to open the modal
+            function openModal(card) {
+                // Get data from the clicked card's data attributes
+                const title = card.getAttribute('data-title');
+                const price = card.getAttribute('data-price');
+                const time = card.getAttribute('data-time');
+                const distance = card.getAttribute('data-distance');
+                const description = card.getAttribute('data-description');
+                const imagePath = card.getAttribute('data-image');
+
+                // Update Modal Content
+                document.getElementById('modalTitle').innerText = title;
+                document.getElementById('modalPrice').innerText = price;
+                document.getElementById('modalTime').innerText = time;
+                document.getElementById('modalDistance').innerText = distance;
+                document.getElementById('modalDescription').innerText = description;
+                // document.getElementById('imageRoute').innerText = title;
+
+                document.getElementById('imageRoute').src = imagePath;
+
+                // Show Modal and disable background scroll
+                document.getElementById('destinationModal').classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            // Function to close the modal
+            function closeModal() {
+                document.getElementById('destinationModal').classList.remove('active');
+                document.body.style.overflow = ''; // Restore background scroll
+            }
+
+            // Placeholder function (used by the booking button)
+            function scrollToBooking() {
+                alert("Redirecting to booking form for the selected trip!");
+                // In a real application, you would add scroll or redirect logic here
+            }
+
+            // Close modal when clicking outside the content
+            document.getElementById('destinationModal').addEventListener('click', function (e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+        </script>
     </section>
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="page-section testimonials-section">
-        <div class="section">
-            <div class="container">
-                <div class="section-title" data-aos="fade-up">
-                    <h2>What Our Travelers Say</h2>
-                    <p>Don't just take our word for it - hear from our satisfied customers</p>
+    <section id="testimonials" class="section testimonials-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Travelers Say</h2>
+                <p>Real experiences from our valued customers</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Excellent service! The driver was professional and courteous. Our trip from Agra to Jaipur was
+                        comfortable and memorable. Highly recommend Hind Travels!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RK</div>
+                        <div class="author-info">
+                            <h4>Rajesh Kumar</h4>
+                            <p>Business Traveler</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="testimonials-grid">
-                    <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="testimonial-text">
-                            "Our family trip to Rajasthan with Hind Travels was absolutely fantastic. The itinerary was well-planned, the hotels were excellent, and our driver was very knowledgeable about all the historical sites."
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">AS</div>
-                            <div class="author-info">
-                                <h4>Anita Sharma</h4>
-                                <p>Family Vacation</p>
-                                <div class="rating">★★★★★</div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "We booked a tempo traveller for our family trip to Shimla. The vehicle was clean and spacious.
+                        The journey was smooth and the pricing was very reasonable."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PS</div>
+                        <div class="author-info">
+                            <h4>Priya Sharma</h4>
+                            <p>Family Vacation</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
                             </div>
                         </div>
                     </div>
-                    <div class="testimonial-card" data-aos="fade-up" data-aos-delay="400">
-                        <div class="testimonial-text">
-                            "As a solo female traveler, safety was my top priority. Hind Travels provided a female driver for my Kerala tour who was not only professional but also shared great insights about local culture."
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">PK</div>
-                            <div class="author-info">
-                                <h4>Priya Kapoor</h4>
-                                <p>Solo Traveler</p>
-                                <div class="rating">★★★★★</div>
-                            </div>
-                        </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Best cab service in Agra! Used their airport transfer service multiple times. Always on time
+                        and very professional. The booking process is super easy too."
                     </div>
-                    <div class="testimonial-card" data-aos="fade-up" data-aos-delay="600">
-                        <div class="testimonial-text">
-                            "We booked a custom honeymoon package to Andaman Islands. Everything was perfect - from the romantic candlelight dinner on the beach to the private cab with decorations. Highly recommended!"
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">RM</div>
-                            <div class="author-info">
-                                <h4>Rahul & Meera</h4>
-                                <p>Honeymoon Trip</p>
-                                <div class="rating">★★★★★</div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AM</div>
+                        <div class="author-info">
+                            <h4>Amit Malhotra</h4>
+                            <p>Corporate Client</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
                             </div>
                         </div>
                     </div>
@@ -428,35 +1558,317 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="page-section">
-        <div class="section">
-            <div class="container">
-                <div class="about-container">
-                    <div class="about-image" data-aos="fade-right">
-                        <i class="fas fa-car-side" style="font-size: 8rem; color: var(--primary);"></i>
+    <section id="about" class="section about-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Hind Travels</h2>
+                <p>Your trusted travel partner since 2010</p>
+            </div>
+            <div class="about-content">
+                <p>
+                    Hind Travels is one of the leading car rental and tour operators based in Agra, India. With over 13
+                    years of experience in the travel industry, we have been providing exceptional travel services to
+                    thousands of satisfied customers.
+                </p>
+                <p>
+                    Our mission is to make travel comfortable, safe, and affordable for everyone. We pride ourselves on
+                    our fleet of well-maintained vehicles, professional drivers, and customer-first approach. Whether
+                    you're planning a family vacation, business trip, or a romantic getaway, we have the perfect
+                    solution for you.
+                </p>
+                <div class="about-features">
+                    <div class="about-feature">
+                        <i class="fas fa-certificate"></i>
+                        <h4>Licensed & Insured</h4>
+                        <p>All our vehicles and drivers are fully licensed and insured</p>
                     </div>
-                    <div class="about-content" data-aos="fade-left">
-                        <div class="section-title" style="text-align: left;">
-                            <h2>About Hind Travels</h2>
-                            <p>Your trusted travel partner since 2005</p>
-                        </div>
-                        <p>Hind Travels was founded with a simple mission: to provide reliable, safe, and comfortable travel experiences across India. Over the years, we've grown from a small local service to one of the region's most trusted travel companies.</p>
-                        <p>Our team of professional drivers and travel experts undergoes rigorous training to ensure your safety and satisfaction. We maintain our fleet to the highest standards, with regular inspections and cleaning protocols.</p>
-                        <div class="stats">
-                            <div class="stat-item">
-                                <div class="stat-number">15K+</div>
-                                <div class="stat-text">Happy Travelers</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-number">500+</div>
-                                <div class="stat-text">Destinations</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-number">24/7</div>
-                                <div class="stat-text">Service</div>
-                            </div>
-                        </div>
+                    <div class="about-feature">
+                        <i class="fas fa-clock"></i>
+                        <h4>24/7 Support</h4>
+                        <p>Round-the-clock customer support for your convenience</p>
                     </div>
+                    <div class="about-feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Safety First</h4>
+                        <p>Your safety is our top priority on every journey</p>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-tags"></i>
+                        <h4>Best Prices</h4>
+                        <p>Competitive pricing with no hidden charges</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section destinations-section">
+        <style>
+            /* General Body/Section Styling - Dark Theme */
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #1a1a2e;
+                /* Dark background for the entire page */
+                color: #e0e0e0;
+                /* Light text for readability */
+            }
+
+            .section.destinations-section {
+                background-color: #1a1a2e;
+                /* Even darker section background */
+                padding: 60px 0;
+            }
+
+            .container {
+                width: 90%;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px 0;
+            }
+
+            /* Section Title - Formal Dark Theme */
+            .section-title {
+                text-align: center;
+                margin-bottom: 50px;
+            }
+
+            .section-title h2 {
+                font-size: 44px;
+                /* Larger, more prominent title */
+                color: #ffffff;
+                /* White title */
+                margin-bottom: 10px;
+                font-weight: bold;
+                letter-spacing: 1px;
+            }
+
+            .section-subtitle {
+                font-size: 18px;
+                color: #a0a0c0;
+                /* Slightly lighter subtitle for contrast */
+                max-width: 600px;
+                margin: 0 auto;
+                line-height: 1.6;
+            }
+
+            /* Search Bar - Dark Theme */
+            .search-bar-container {
+                margin-bottom: 50px;
+                text-align: center;
+                position: relative;
+                /* For the search icon */
+            }
+
+            #destinationSearch {
+                width: 100%;
+                max-width: 700px;
+                /* Wider search bar */
+                padding: 18px 25px;
+                /* More padding */
+                border: 1px solid #4a4a6e;
+                /* Darker border */
+                border-radius: 10px;
+                /* Slightly more rounded */
+                font-size: 17px;
+                background-color: #2a2a4a;
+                /* Dark background for input */
+                color: #ffffff;
+                /* White text for input */
+                box-sizing: border-box;
+                transition: border-color 0.3s, box-shadow 0.3s;
+                padding-right: 60px;
+                /* Space for icon */
+            }
+
+            #destinationSearch::placeholder {
+                color: #8888aa;
+                /* Lighter placeholder text */
+            }
+
+            #destinationSearch:focus {
+                border-color: #007bff;
+                /* Primary blue focus color */
+                outline: none;
+                box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.3);
+                /* Subtle glow on focus */
+            }
+
+            /* Search icon (using a simple square for demonstration) */
+            .search-bar-container::after {
+                content: '🔍';
+                /* Unicode search icon */
+                position: absolute;
+                right: calc(50% - 700px/2 + 20px);
+                /* Adjust position relative to max-width */
+                top: 50%;
+                transform: translateY(-50%);
+                color: #8888aa;
+                font-size: 20px;
+                pointer-events: none;
+                /* Make sure it doesn't block input clicks */
+            }
+
+            /* Destinations Grid and Cards - Dark Theme */
+            .destinations-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                /* Larger cards */
+                gap: 25px;
+                /* More space between cards */
+            }
+
+            .destination-card {
+                background-color: #2a2a4a;
+                /* Darker card background */
+                padding: 25px 20px;
+                /* More vertical padding */
+                border-radius: 10px;
+                /* More rounded corners */
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                /* More pronounced shadow */
+                cursor: pointer;
+                transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+                text-align: center;
+                border: 1px solid #3a3a5e;
+                /* Subtle border */
+                position: relative;
+                /* For the square icon */
+            }
+
+            .destination-card:hover {
+                transform: translateY(-7px);
+                /* Lift more on hover */
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+                /* Deeper shadow on hover */
+                background-color: #3a3a5e;
+                /* Slightly lighter on hover */
+            }
+
+            .destination-card h3 {
+                margin: 0;
+                font-size: 18px;
+                color: #ffffff;
+                /* White text for destination name (Original from line 144) */
+                font-weight: normal;
+                /* Original from line 145 */
+            }
+
+            .destination-card h3 {
+                /* --- The Invisible Text Fix --- */
+                margin: 0;
+                font-size: 17px;
+                /* Changed color from #333 (dark gray/invisible) to #00aaff (bright, cool blue) */
+                color: #fff;
+                /* Added bold font weight */
+                font-weight: bold;
+            }
+        </style>
+
+        <div class="container">
+            <div class="section-title">
+                <h2> Amazing Destinations</h2>
+                <p class="section-subtitle">Discover incredible places to explore and book your cab.</p>
+            </div>
+
+            <div class="search-bar-container">
+                <input type="text" id="destinationSearch" placeholder="Search for a route (e.g., Delhi to Agra)..."
+                    onkeyup="filterDestinations()">
+            </div>
+
+            <div class="destinations-grid" id="destinationsGrid">
+            </div>
+        </div>
+
+        <script>
+            // 1. Consolidated List of Destinations
+            const allDestinations = [
+                "Ghaziabad to Haridwar", "Ghaziabad to Jaipur", "Ghaziabad to Kainchi dham",
+                "Ghaziabad to Kashipur", "Ghaziabad to Khatima", "Ghaziabad to Lakhimpur",
+                "Ghaziabad to Lucknow", "Ghaziabad to Manona dham", "Ghaziabad to Mathura",
+                "Ghaziabad to Meerut", "Ghaziabad to Moradabad",
+                "Agra Taxi Service", "Agra to Ayodhya", "Agra to Banbasa",
+                "Agra to Bareilly", "Agra to Dehradun", "Agra to Delhi Airport",
+                "Agra to Ghaziabad", "Agra to Gorakhpur", "Agra to Gwalior",
+                "Agra to Haldwani", "Agra to Haridwar",
+                "Jhansi Taxi Service", "Kanpur Taxi Service",
+                "Kanpur to Ayodhya", "Kanpur to Bareilly", "Kanpur to Chandigarh",
+                "Kanpur to Dehradun", "Kanpur to Delhi Cab", "Kanpur to Faridabad",
+                "Kanpur to Ghaziabad", "Kanpur to Gurgaon", "Kanpur to Haridwar",
+                "Muzaffarnagar Taxi Service", "Muzaffarnagar to Manona dham", "Nagina Taxi Service",
+                "Nainital Taxi Service", "Nainital to Agra", "Nainital to Ayodhya",
+                "Nainital to Bareilly", "Nainital to Dehradun", "Nainital to Delhi Cab",
+                "Nainital to Faridabad",
+                "Rampur to Bhimtal", "Rampur to Bijnor", "Rampur to Delhi Cab",
+                "Delhi to Amritsar", "Jaipur to Pushkar", "Delhi to Corbett",
+                "Agra to Fatehpur Sikri", "Delhi to Kasauli", "Jaipur to Jodhpur",
+                "Delhi to Dehradun", "Agra to Aligarh", "Delhi to Chandigarh",
+                "Jaipur to Jaisalmer", "Delhi to Agra", "Agra to Bharatpur",
+                "Delhi to Vrindavan", "Jaipur to Ajmer"
+            ];
+
+            const grid = document.getElementById('destinationsGrid');
+
+            // 2. Function to redirect on click
+            function redirectToBooking(destination) {
+                // Redirects to booking.html and passes the route as a query parameter
+                window.location.href = `booking.html?route=${encodeURIComponent(destination)}`;
+            }
+
+            // 3. Function to render the destination cards
+            function renderDestinations(destinations) {
+                grid.innerHTML = ''; // Clear existing cards
+                destinations.forEach(destination => {
+                    const card = document.createElement('div');
+                    card.className = 'destination-card';
+                    // Attach the click event to redirect, escaping single quotes for stability
+                    card.setAttribute('onclick', `redirectToBooking('${destination.replace(/'/g, "\\'")}')`);
+
+                    const title = document.createElement('h3');
+                    title.textContent = destination;
+
+                    card.appendChild(title);
+                    grid.appendChild(card);
+                });
+            }
+
+            // 4. Function to filter destinations based on search input
+            function filterDestinations() {
+                const input = document.getElementById('destinationSearch');
+                const filter = input.value.toUpperCase();
+
+                const filteredList = allDestinations.filter(destination => {
+                    return destination.toUpperCase().includes(filter);
+                });
+
+                renderDestinations(filteredList);
+            }
+
+            // 5. Initial rendering when the page loads
+            document.addEventListener('DOMContentLoaded', () => {
+                renderDestinations(allDestinations);
+            });
+        </script>
+    </section>
+    <!-- Followers Section -->
+    <section class="section followers-section">
+        <div class="container">
+            <div class="followers-grid">
+                <div class="follower-item">
+                    <i class="fas fa-users"></i>
+                    <div class="follower-number">50,000+</div>
+                    <div class="follower-text">Happy Customers</div>
+                </div>
+                <div class="follower-item">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <div class="follower-number">200+</div>
+                    <div class="follower-text">Destinations Covered</div>
+                </div>
+                <div class="follower-item">
+                    <i class="fas fa-car"></i>
+                    <div class="follower-number">150+</div>
+                    <div class="follower-text">Fleet Vehicles</div>
                 </div>
             </div>
         </div>
@@ -465,57 +1877,148 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-container">
-                <div class="footer-col">
-                    <h3>Hind Travels</h3>
-                    <p>Your reliable travel partner offering premium tour services with safety and comfort as our top priorities.</p>
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Hind Travels</h3>
+                    <p>Your trusted travel partner providing premium car rental and tour services across India since
+                        2010. We are committed to making your journey comfortable, safe, and memorable.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
-                <div class="footer-col">
+                <div class="footer-column">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="#" class="nav-link" data-target="home">Home</a></li>
-                        <li><a href="#" class="nav-link" data-target="services">Services</a></li>
-                        <li><a href="#" class="nav-link" data-target="fleet">Our Fleet</a></li>
-                        <li><a href="#" class="nav-link" data-target="destinations">Destinations</a></li>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Our Services</a></li>
+                        <li><a href="#fleet">Our Fleet</a></li>
+                        <li><a href="#destinations">Destinations</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#about">About Us</a></li>
                     </ul>
                 </div>
-                <div class="footer-col">
-                    <h3>Services</h3>
+                <div class="footer-column">
+                    <h3>Our Services</h3>
                     <ul>
-                        <li><a href="#">City Tours</a></li>
-                        <li><a href="#">Hill Station Getaways</a></li>
-                        <li><a href="#">Beach Vacations</a></li>
-                        <li><a href="#">Adventure Tours</a></li>
+                        <li><a href="#bookingForm">Airport Transfer</a></li>
+                        <li><a href="#bookingForm">Outstation Trips</a></li>
+                        <li><a href="#bookingForm">City Tours</a></li>
+                        <li><a href="#bookingForm">Hourly Rental</a></li>
+                        <li><a href="#bookingForm">Corporate Services</a></li>
+                        <li><a href="#bookingForm">Wedding Events</a></li>
                     </ul>
                 </div>
-                <div class="footer-col">
-                    <h3>Newsletter</h3>
-                    <p>Subscribe to our newsletter for the latest travel offers and updates.</p>
-                    <form class="newsletter-form">
-                        <input type="email" class="newsletter-input" placeholder="Your email address">
-                        <button type="submit" class="newsletter-btn"><i class="fas fa-paper-plane"></i></button>
-                    </form>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Agra, Uttar Pradesh, India</li>
+                        <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                        <li><i class="fas fa-envelope"></i> info@hindtravels.com</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Available</li>
+                    </ul>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 Hind Travels. All rights reserved. | Designed with <i class="fas fa-heart" style="color: #e74c3c;"></i> for travelers</p>
+                <p>&copy; 2024 Hind Travels. All Rights Reserved. | Designed with <i class="fas fa-heart"
+                        style="color: var(--primary);"></i> for travelers</p>
             </div>
         </div>
     </footer>
 
     <!-- Back to Top Button -->
-    <div class="back-to-top" id="backToTop">
-        <i class="fas fa-chevron-up"></i>
+    <div class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
     </div>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="script.js"></script>
+    <script>
+        // Toggle Mobile Menu
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Smooth Scroll to Booking Form
+        function scrollToBooking() {
+            document.getElementById('bookingForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Scroll to Top
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Show/Hide Back to Top Button
+        window.addEventListener('scroll', function () {
+            const backToTop = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        // Smooth Scroll for Nav Links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#bookingForm') {
+                    scrollToBooking();
+                } else {
+                    const targetSection = document.querySelector(targetId);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+                // Close mobile menu if open
+                document.getElementById('navMenu').classList.remove('active');
+            });
+        });
+
+        // Submit Booking Function
+        function submitBooking() {
+            const pickup = document.getElementById('pickup').value;
+            const destination = document.getElementById('destination').value;
+            const tripType = document.getElementById('trip-type').value;
+            const taxiType = document.getElementById('taxi-type').value;
+            const pickupDate = document.getElementById('pickup-date').value;
+            const pickupTime = document.getElementById('pickup-time').value;
+            const name = document.getElementById('name').value;
+            const mobile = document.getElementById('mobile').value;
+
+            // Basic validation
+            if (!pickup || !destination || !tripType || !taxiType || !pickupDate || !pickupTime || !name || !mobile) {
+                alert('Please fill in all required fields!');
+                return;
+            }
+
+            // Mobile number validation (basic)
+            if (mobile.length < 10) {
+                alert('Please enter a valid mobile number!');
+                return;
+            }
+
+            // Show success message
+            alert(`Booking Confirmed!\n\nThank you, ${name}!\n\nYour ${tripType} trip from ${pickup} to ${destination} has been booked.\n\nVehicle: ${taxiType}\nDate: ${pickupDate}\nTime: ${pickupTime}\n\nWe will contact you at ${mobile} shortly to confirm the details.\n\nHappy Journey with Hind Travels!`);
+
+            // Reset form
+            document.getElementById('pickup').value = '';
+            document.getElementById('destination').value = '';
+            document.getElementById('trip-type').value = '';
+            document.getElementById('taxi-type').value = '';
+            document.getElementById('pickup-date').value = '';
+            document.getElementById('pickup-time').value = '';
+            document.getElementById('name').value = '';
+            document.getElementById('mobile').value = '';
+        }
+
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('pickup-date').setAttribute('min', today);
+    </script>
 </body>
 
 </html>
